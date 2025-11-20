@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Page;
-
 class FrontPageController extends Controller
 {
+    // Dynamic CMS pages (About, Contact, etc)
     public function show($slug)
     {
-        $page = Page::where('slug', $slug)->firstOrFail();
-        return view('page', compact('page'));
+        if (!in_array($slug, ['about', 'contact'])) {
+            abort(404);
+        }
+
+        return view('pages.' . $slug);
     }
 }

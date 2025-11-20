@@ -8,11 +8,7 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $latestPosts = Post::where('is_published', true)
-            ->latest()
-            ->take(5)
-            ->get();
-
-        return view('home', compact('latestPosts'));
+        $posts = Post::where('is_published', true)->latest()->take(6)->get();
+        return view('home', compact('posts'));
     }
 }
